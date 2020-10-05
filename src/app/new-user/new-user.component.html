@@ -1,1 +1,20 @@
-<p>new-user works!</p>
+<!-- <div *ngIf="isSuper; else elseBlock"> -->
+    
+    <div class="container">
+        <div class="bg-light  flex-wrap align-content-right ">
+            <div class="form-group">
+                <h2>Create new User</h2>
+                <form>
+                    <label>Username: </label>
+                    <input type="text"  class="form-control" placeholder="Enter username:" [(ngModel)]="username" name="username">
+                    <label>Password: </label>
+                    <input type="number"   class="form-control" placeholder="Password" [(ngModel)]="pwd" name="pwd" >
+                </form>
+                <br>
+                <button (click)="createUser(username, pwd)" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+
+<!-- </div> -->
+<ng-template #elseBlock>Please log in to with an account with Super Admin permissions to create new user accounts, thank you.</ng-template>

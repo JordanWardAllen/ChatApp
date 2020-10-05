@@ -22,11 +22,11 @@ app.get('/', function(req, res){
 
 MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){
     if (err) {return console.log(err)} else { console.log('database created!')}
-    const dbName = 'mydb';
+    const dbName = 'chatAppDB';
     const db = client.db(dbName);
 
     require('./routes/read.js')(db, app);
-    require('./routes/getProduct.js')(db, app);
+    require('./routes/getUser.js')(db, app);
     require('./routes/add.js')(db, app);
     require('./routes/update.js')(db, app, ObjectID);
     require('./routes/remove.js')(db, app, ObjectID);

@@ -14,6 +14,7 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatService } from "./services/chat.service";
 import { UserService } from "./services/user.service";
+import { ProfilesComponent } from './profiles/profiles.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { UserService } from "./services/user.service";
     ChatComponent,
     LoginComponent,
     NewUserComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfilesComponent
   ],
   imports: [
     BrowserModule, RouterModule,AppRoutingModule, FormsModule, HttpClientModule, CommonModule
