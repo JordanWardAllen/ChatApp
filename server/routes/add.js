@@ -3,11 +3,14 @@ module.exports = function(db, app){
         if (!req.body){
             return res.sendStatus(400)
         }
+        console.log('fired')
         user = req.body
-        newVal = {id: user.id, username : user.username , pwd: user.pwd, email: user.email, role: user.role, valid: "true"};
+        
         const collection = db.collection('users');
-        collection.find({'id' : user.id}).count((err, count) =>{
-            if (count == 0){
+        collection.find().count((err, count) =>{
+            newId = count
+            newVal = {id: newId.toString(), username : user.username , pwd: user.pwd, email: user.email, role: user.role, valid: "true"};
+            console.log(newVal)
                 collection.insertOne(newVal, (err, data) =>{
                     if (err){
                         console.log(err)
@@ -16,9 +19,6 @@ module.exports = function(db, app){
                         return newVal;
                     }
                 })
-            } else {
-                res.send({valid : false});
-            }
         })
     })
 }

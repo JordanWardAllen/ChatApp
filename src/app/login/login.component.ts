@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         console.log(data)
         localStorage.setItem('valid', "true")
         localStorage.setItem('currentUser', data.username)
+        localStorage.setItem('currentUserRole', data.role)
         this.router.navigateByUrl('chat');
       } else {
         alert('Credentials incorrect, please try again')

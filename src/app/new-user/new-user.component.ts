@@ -21,7 +21,7 @@ export class NewUserComponent implements OnInit {
   newUserRole : String = "";
   newUserCredentials = {};
   success = null;
-  CurrentUserRole : String = "";
+  CurrentUserRole : String = localStorage.getItem('currentUserRole');
   isSuper : Boolean;
 
   ngOnInit(): void {
@@ -34,10 +34,14 @@ export class NewUserComponent implements OnInit {
 
 
   createUser(username, pwd){
+    this.CurrentUserRole = localStorage.getItem('currentUserRole');
+    console.log(this.CurrentUserRole)
     if (this.CurrentUserRole == "Super"){
       this.newUserRole = "Group Admin"
+      console.log('new user group admin')
     } else if (this.CurrentUserRole == "Group Admin"){
       this.newUserRole = "Group Assis"
+      console.log('new user group assis')
     }
     let newUserCredentials = {username : this.username, pwd : this.pwd, email : this.email, role : this.newUserRole};
     this.userService.addUser(newUserCredentials).subscribe((data: any) => {
