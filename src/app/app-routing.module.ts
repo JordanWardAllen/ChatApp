@@ -4,13 +4,15 @@ import { ChatComponent } from './chat/chat.component';
 import { LoginComponent } from './login/login.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ProfilesComponent } from './profiles/profiles.component';
 
 
 const routes: Routes = [
   {path: 'chat', component: ChatComponent},
   {path: '', component: LoginComponent},
-  {path: 'register', component: NewUserComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'newUser', component: NewUserComponent},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'profiles', component: ProfilesComponent}
 ];
 
 @NgModule({

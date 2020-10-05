@@ -10,19 +10,19 @@ import { UserService } from "../services/user.service";
 })
 export class ProfilesComponent implements OnInit {
   IdToDelete = "";
-  UserList = [];
+  userList = [];
   constructor(private router: Router, public userService: UserService, private http:HttpClient) { }
 
   ngOnInit(): void {
-    localStorage.clear();
+    localStorage.setItem('currentID', "");
     this.userService.getUsers().subscribe((data) =>{
-      this.UserList = data;
+      this.userList = data;
     })
   }
 
   DeleteUser(IdToDelete){
     this.userService.removeUser(IdToDelete).subscribe((data) =>{
-      this.UserList = data;
+      this.userList = data;
     })
   }
 

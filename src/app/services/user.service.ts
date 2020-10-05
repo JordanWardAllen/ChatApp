@@ -37,4 +37,7 @@ export class UserService {
     return this.http.post<any>("http://localhost:3000/api/remove", {"id" : IdToDelete});
   }
 
+  auth(credentials){
+    return this.http.post<any>("http://localhost:3000/api/auth", credentials);
+  }
 }

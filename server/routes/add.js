@@ -3,7 +3,6 @@ module.exports = function(db, app){
         if (!req.body){
             return res.sendStatus(400)
         }
-
         user = req.body
         newVal = {id: user.id, username : user.username , pwd: user.pwd, email: user.email, role: user.role, valid: "true"};
         const collection = db.collection('users');

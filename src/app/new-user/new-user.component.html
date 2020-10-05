@@ -8,7 +8,7 @@
                     <label>Username: </label>
                     <input type="text"  class="form-control" placeholder="Enter username:" [(ngModel)]="username" name="username">
                     <label>Password: </label>
-                    <input type="number"   class="form-control" placeholder="Password" [(ngModel)]="pwd" name="pwd" >
+                    <input type="text"   class="form-control" placeholder="Password" [(ngModel)]="pwd" name="pwd" >
                 </form>
                 <br>
                 <button (click)="createUser(username, pwd)" class="btn btn-primary">Create</button>

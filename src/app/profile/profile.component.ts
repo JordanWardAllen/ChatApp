@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
   constructor(private router: Router, public userService: UserService, private http:HttpClient) { }
   username  = "";
   pwd = "";
+  id = "";
   role = "";
   email  = "";
   currentUser = {}
@@ -25,14 +26,15 @@ export class ProfileComponent implements OnInit {
     this.userService.getUser(this.IdToUpdate).subscribe((data) =>{
       this.currentUser = data;
       this.username = data.username
+      this.id = data.id
       this.pwd = data.pwd;
       this.email = data.email
       this.role = data.role;
     })
   }
 
-  UpdateProduct(username, pwd, email, role){
-    let currentUser = {userId: this.IdToUpdate, username: this.username, pwd: this.pwd, email : this.email, role: this.role, valid : "true"};
+  UpdateUser(username,email, role, pwd, ){
+    let currentUser = {id: this.id, username: this.username, pwd: this.pwd, email : this.email, role: this.role, valid : "true"};
     this.userService.updateUser(currentUser).subscribe((data: any) => {
       console.log(currentUser);
       this.router.navigateByUrl('');

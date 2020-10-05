@@ -1,1 +1,17 @@
 <p>profiles works!</p>
+<div class="container">
+    <div class="bg-light  flex-wrap align-content-right ">
+        <div *ngFor="let user of userList">
+            <h4>{{user.username}}</h4>
+            <ul >
+                <li>Id: {{user.id}}</li>
+                <li>email: {{user.email}}</li>
+                <li>role: {{user.role}}</li>
+                <li>password (for testing only): {{user.pwd}}</li>
+
+            </ul>
+            <button (click)="IdToUpdate(user.id)" class="btn btn-primary">Update</button>
+            <button (click)="DeleteUser(user.id)" class="btn btn-primary">Delete</button>
+    </div>
+    </div>
+</div>
