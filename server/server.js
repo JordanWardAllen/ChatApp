@@ -8,9 +8,12 @@ const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 const path = require('path');
+const formidable = require('formidable');
 
 app.use(cors());
 app.use(bodyParser.json());
+// app.use(express.static(path.join(__dirname, "../dist/images")))
+app.use('/userImages', express.static(path.join(__dirname, '../src/assets/userImages')))
 
 const url = 'mongodb://localhost:27017';
 
@@ -23,6 +26,7 @@ MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, func
     require('./routes/getUser.js')(db, app);
     require('./routes/auth.js')(db, app);
     require('./routes/add.js')(db, app);
+    require('./routes/imgUpload.js')(db, app, formidable);
     require('./routes/update.js')(db, app, ObjectID);
     require('./routes/remove.js')(db, app, ObjectID);
     require('./listen')(app, http);

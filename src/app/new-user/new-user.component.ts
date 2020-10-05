@@ -25,7 +25,7 @@ export class NewUserComponent implements OnInit {
   isSuper : Boolean;
 
   ngOnInit(): void {
-    if (localStorage.getItem('role') == "Super" || localStorage.getItem('role') == "Group Admin" ){
+    if (localStorage.getItem('currentUserRole') == "Super" || localStorage.getItem('currentUserRole') == "Group Admin" ){
       this.isSuper = true;   
   } else {
       this.isSuper = false;

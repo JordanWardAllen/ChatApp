@@ -14,7 +14,9 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatService } from "./services/chat.service";
 import { UserService } from "./services/user.service";
+import { ImageUploadService } from "./services/image-upload.service";
 import { ProfilesComponent } from './profiles/profiles.component';
+import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { ProfilesComponent } from './profiles/profiles.component';
     LoginComponent,
     NewUserComponent,
     ProfileComponent,
-    ProfilesComponent
+    ProfilesComponent,
+    ProfileSettingsComponent
   ],
   imports: [
     BrowserModule, RouterModule,AppRoutingModule, FormsModule, HttpClientModule, CommonModule
