@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
-import * as io from 'socket.io-client';
+import { socket } from 'socket.io-client';
+
 
 
 const SERVER_URL = 'http://localhost:3000/'; 
@@ -54,7 +55,7 @@ export class UserService {
   );
   }
   public initSocket(): void {
-    this.socket = io(SERVER_URL);    
+    this.socket = socket(SERVER_URL);    
   }
 
 

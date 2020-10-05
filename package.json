@@ -24,6 +24,7 @@
     "redux": "^4.0.5",
     "rxjs": "~6.6.0",
     "rxjs-compat": "^6.6.3",
+    "socket.io": "^2.3.0",
     "tslib": "^2.0.0",
     "webpack": "^4.44.2",
     "zone.js": "~0.10.2"

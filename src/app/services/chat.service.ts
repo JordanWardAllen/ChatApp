@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import * as io from 'socket.io-client';
+import { socket } from 'socket.io-client';
 import { HttpClient } from '@angular/common/http';
 
 const SERVER_URL = 'http://localhost:3000/';
@@ -21,7 +19,7 @@ export class ChatService {
 
 
   public initSocket(): void {
-    this.socket = io(SERVER_URL);
+    this.socket = socket(SERVER_URL);
   }
 
    public sendChat(chat: any): void {
