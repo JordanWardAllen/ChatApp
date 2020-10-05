@@ -28,44 +28,22 @@ export class LoginComponent implements OnInit {
   } else {
       this.isValid == "false"
   }
-
 }
   
-
   public login( pwd, email){
   
     this.credentials = {pwd: this.pwd,  email: this.email}
     this.userService.auth(this.credentials).subscribe((data: any) => {
       if (data.valid == "true"){
         this.isValid == "true";
+        console.log(data)
         localStorage.setItem('valid', "true")
+        localStorage.setItem('currentUser', data.username)
         this.router.navigateByUrl('chat');
       } else {
         alert('Credentials incorrect, please try again')
         this.isValid == "false"
       }
-      // this.success = data;
-      // if (this.success.valid == false){
-      //   alert("This ID is not valid, please try another.")
-      // }else{ 
-      //   this.router.navigateByUrl('');
-      // }
-      });
-
-    // this.ioConnection = this.userService.onLogin().subscribe((auth: any)=> {
-    //   localStorage.setItem('username', auth.username);  
-    //   localStorage.setItem('role', auth.role);  
-    //   console.log(auth.username)
-    //   localStorage.setItem('valid', auth.valid); 
-    //   console.log(localStorage.getItem('email'));
-    //   if (localStorage.getItem('valid') == "true"){
-    //     this.isValid == "true"
-    //     this.router.navigateByUrl('chat');
-    //   } else {
-    //     this.isValid == "false"
-    //   }
-    // });
-
+    });
   }
-
 }

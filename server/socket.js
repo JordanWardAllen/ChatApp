@@ -1,18 +1,25 @@
 module.exports = {
-    connect: function(io){
+    connect: function(io, db){
         console.log('socket connected')
-        io.on('connection', (socket)=> {  
-            // console.log(socket)    
-                // io.emit('getUsers', fileData.User);   
-                // io.emit('chat', fileData.Chat); 
-            socket.on('message', (message)=>{
-                console.log('on msg')
-                console.log(message) 
-                io.emit('message', message);
+        const collection = db.collection('chat');
+        
+        io.on('connection', (socket)=> { 
+
+            socket.on('chat', (chat)=>{      
+                collection.insertOne({chatMsg: chat.chatMsg, sender : chat.sender, group: chat.group, channel: chat.channel}, (err, data) =>{
+                    if (err){
+                        console.log(err)
+                    } else {
+                        io.emit('chat', chat);
+                    }
+                })
             }),
-            socket.on('chat', (chat)=>{    
-                // console.log(chat)   
-                io.emit('chat', chat.messagecontent);
+
+            socket.on('test', (test)=>{   
+                collection.find({}).toArray((err, data) =>{
+                    console.log('connection fired')
+                    io.emit('test', data ); 
+                })  
             })
         })
     }

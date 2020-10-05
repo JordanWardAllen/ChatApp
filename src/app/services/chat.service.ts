@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-// import { socket } from 'socket.io-client';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import * as io from 'socket.io-client';
@@ -21,34 +20,42 @@ export class ChatService {
 
 
 
-  public initSocket(): void {
+  public initSocket(): void{
     this.socket = io(SERVER_URL);
   }
+
+  public onInit(): Observable<any> {
+    let observable = new Observable(observer=>{
+      this.socket.on('chatMsg', (data:any) => observer.next(data));
+    })
+    return observable;
+  }
+  // public onMessage(): Observable<any> {
+  //   let observable = new Observable(observer=>{
+  //     this.socket.on('chatMsg', () => observer.next());
+  //   })
+  //   return observable;
+  // }
+
+  public test(): Observable<any> {
+    let observable = new Observable(observer=>{
+      this.socket.on('test', (test) => observer.next(test));
+    })
+    return observable;
+  }
+
+  public sendtest(test: any): void {
+    this.socket.emit('test', test);
+  }
+  // public sendMsg(chatMsg: any): void {
+  //   this.socket.emit('chatMsg', chatMsg);
+  // }
 
    public sendChat(chat: any): void {
     this.socket.emit('chat', chat);
   }
 
-  public onChat(): Observable<any> {
-    let observable = new Observable(observer=>{
-      this.socket.on('chat', (data:any) => observer.next(data));
-    })
-    return observable;
-  }
 
-  
-
-
-  public send(message: string): void {
-    this.socket.emit('message', message);
-  }
-
-  public onMessage(): Observable<any> {
-    let observable = new Observable(observer=>{
-      this.socket.on('message', (data:string) => observer.next(data));
-    })
-    return observable;
-  }
 
 
 }

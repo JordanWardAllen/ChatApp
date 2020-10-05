@@ -1,4 +1,5 @@
-import { Component, OnInit, ɵsetCurrentInjector } from '@angular/core';
+import { Component, OnInit, ɵsetCurrentInjector, Injectable } from '@angular/core';
+import { Observable } from "rxjs";
 import { ChatService } from '../services/chat.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ChatComponent implements OnInit {
 
-  messagecontent: string = "";
+  chatMsg: string = "";
   messages  = [];
   newMessage = {};
   ioConnection: any;
@@ -19,7 +20,6 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.initToConnection();
-    this.getMsg();
     if (localStorage.getItem('valid')){
       this.isValid = true
       console.log(localStorage.getItem('valid'))
@@ -28,40 +28,30 @@ export class ChatComponent implements OnInit {
 
 private initToConnection(){
   this.chatService.initSocket();
-  this.ioConnection = this.chatService.onChat().subscribe((chat: any)=> {
-    this.messages.push(chat);
-  });
+  this.getMsg();
+
 
 }
 
 public getMsg(){
-  
-  this.ioConnection = this.chatService.onChat().subscribe((chat: any)=> {
-    
-    // console.log(chat.messagecontent)
-    // this.messages.push(chat.messagecontent);
-    // console.log(this.messages)
-    // localStorage.setItem('userCount', getUsers.length)
-    // for (let i = 0; i< chat.length; i++){
-      
-    //   this.messages = chat.messagecontent;
-    //   console.log(this.messages)
-
-    // }
+  let y = 'test1'
+  this.chatService.sendtest(y);
+  this.ioConnection = this.chatService.test().subscribe((test: any)=> {
+    this.messages = [];
+    for (let i = 0; i < test.length; i++){
+      let newMsg =  {chatMsg : test[i].chatMsg, sender : test[i].sender, group: test[i].group , channel : test[i].channel }
+      this.messages.push(newMsg);
+    }
   });
 }
 
 
-public chat(messagecontent){
-  this.newMessage = {messagecontent: this.messagecontent};
-    if (this.messagecontent){
-      // console.log(this.messagecontent)
+public chat(chatMsg){
+  this.newMessage = {chatMsg: this.chatMsg, sender : localStorage.getItem('currentUser'), group: "group 1", channel: "channel 1" };
+    if (this.chatMsg){
       this.chatService.sendChat(this.newMessage);
-      this.messagecontent = null;
-      
-      // this.getMsg();
-      // this.router.navigateByUrl('chat');
-
+      this.chatMsg = null;
+      this.getMsg();
     } else {
       console.log('Failed to send message. Make sure text box is not empty.')
     }

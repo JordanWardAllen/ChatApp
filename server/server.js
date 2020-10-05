@@ -9,16 +9,10 @@ const MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 const path = require('path');
 
-
 app.use(cors());
 app.use(bodyParser.json());
 
 const url = 'mongodb://localhost:27017';
-socket.connect(io);
-// app.get('/', function(req, res){
-//     res.sendFile(__dirname + '/../dist/index');
-// });
-
 
 MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){
     if (err) {return console.log(err)} else { console.log('database created!')}
@@ -32,6 +26,5 @@ MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, func
     require('./routes/update.js')(db, app, ObjectID);
     require('./routes/remove.js')(db, app, ObjectID);
     require('./listen')(app, http);
-    // require('./socket')
-
+    socket.connect(io, db)
 });

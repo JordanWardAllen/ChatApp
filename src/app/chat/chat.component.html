@@ -2,17 +2,18 @@
     <div class="container">
       <form>
           <div class="form-group">
-            <label for="messagecontent">New Message</label>
-            <input type="text" [(ngModel)]="messagecontent" name="messagecontent" id="messagecontent" class="form-control">
+            <label for="chatMsg">New Message</label>
+            <input type="text" [(ngModel)]="chatMsg" name="chatMsg" id="chatMsg" class="form-control">
           </div>
           <div  class="form-group">
-            <button (click)="chat(messagecontent)" class="btn btn-primary">Send</button>
+            <button (click)="chat(chatMsg)" class="btn btn-primary">Send</button>
           </div>
     </form>
     </div>
     <h2>Chat messages</h2>
     <ul id="leftCol">
-      <li *ngFor="let message of messages" >{{message}}</li>
+      <!-- <li *ngFor="let message of messages" >{{message}}</li> -->
+      <li *ngFor="let msg of messages" >{{msg.sender}}: {{msg.chatMsg}}</li>
       <!-- <li id="rightCol" >{{currentTime}}</li> -->
     </ul>
   
