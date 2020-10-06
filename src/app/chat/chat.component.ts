@@ -15,6 +15,9 @@ export class ChatComponent implements OnInit {
   newMessage = {};
   ioConnection: any;
   isValid: boolean = false
+  isInChannel = false;
+  channelList = "";
+  listOfChannels = [];
 
   constructor(private chatService : ChatService, private router: Router) { }
 
@@ -34,20 +37,25 @@ private initToConnection(){
 }
 
 public getMsg(){
-  let y = 'test1'
+  let y = 'Channel 2'
+  
   this.chatService.sendtest(y);
   this.ioConnection = this.chatService.test().subscribe((test: any)=> {
     this.messages = [];
-    for (let i = 0; i < test.length; i++){
-      let newMsg =  {chatMsg : test[i].chatMsg, sender : test[i].sender, group: test[i].group , channel : test[i].channel }
-      this.messages.push(newMsg);
-    }
+    // console.log(test)
+      for (let i = 0; i < test.length; i++){
+        // console.log(test[0].chatHist[i].chatMsg)
+        console.log(test[i].chatMsg)
+      //   // let newMsg =  test[i].chatMsg
+        this.messages.push(test[i].chatMsg);
+        console.log(this.messages)
+      }
   });
 }
 
 
 public chat(chatMsg){
-  this.newMessage = {chatMsg: this.chatMsg, sender : localStorage.getItem('currentUser'), group: "group 1", channel: "channel 1" };
+  this.newMessage = {chatMsg: this.chatMsg, sender : localStorage.getItem('currentUser'), group: "group 1", channelName: "Channel 1" };
     if (this.chatMsg){
       this.chatService.sendChat(this.newMessage);
       this.chatMsg = null;

@@ -1,41 +1,22 @@
-<div *ngIf="isValid">
-    <div class="container">
+<div class="container">
       <form>
+        <!-- <div class="form-group" *ngIf="isInChannel"> -->
           <div class="form-group">
             <label for="chatMsg">New Message</label>
             <input type="text" [(ngModel)]="chatMsg" name="chatMsg" id="chatMsg" class="form-control">
-          </div>
-          <div  class="form-group">
             <button (click)="chat(chatMsg)" class="btn btn-primary">Send</button>
           </div>
-    </form>
-    </div>
+    
+    <!-- <div class="form-group">
+      <select [{ngModel}]="channelList" name="channelList">
+        <option [{ngModel}]="null">select channel</option>
+        <option *ngFor="let channel of listOfChannels">{{channel}}</option>
+    </div> -->
+  </form>
     <h2>Chat messages</h2>
     <ul id="leftCol">
-      <!-- <li *ngFor="let message of messages" >{{message}}</li> -->
-      <li *ngFor="let msg of messages" >{{msg.sender}}: {{msg.chatMsg}}</li>
-      <!-- <li id="rightCol" >{{currentTime}}</li> -->
+      <li *ngFor="let msg of messages" >{{msg}}</li>
     </ul>
   
-  
-  <!-- 
-    <ul id="rightCol">
-      <li id="rightCol"*ngFor="let time of currentTime" >Timestamp: {{time}}</li>
-    </ul>
-  
-  </div> -->
-  
-  
-  <!-- <h1>table</h1>
-  <table *ngFor="let message of messages">
-    <tr *ngFor="let message of messages">
-      
-      
-    </tr> -->
-    <!-- <tr *ngFor="let time of currentTime">
-      <td>{{message}}</td>
-      <td> {{time}}</td>
-    </tr>
-  </table> --> 
-  
-  
+
+  </div>
