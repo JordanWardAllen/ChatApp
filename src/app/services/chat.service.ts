@@ -42,8 +42,19 @@ export class ChatService {
     return observable;
   }
 
+  public channel(): Observable<any> {
+    let observable = new Observable(observer=>{
+      this.socket.on('channel', (channel) => observer.next(channel));
+    })
+    return observable;
+  }
+
   public sendtest(test: any): void {
     this.socket.emit('test', test);
+  }
+
+  public sendchannel(channel: any): void {
+    this.socket.emit('channel', channel);
   }
   // public sendMsg(chatMsg: any): void {
   //   this.socket.emit('chatMsg', chatMsg);

@@ -9,14 +9,8 @@ module.exports = {
                 collection.findOne({channelName: chat.channelName}, (err, data)=>{
                     chatHistory = data.chatHist
                     chatHistory[chatHistory.length] = {chatMsg : chat.chatMsg}
-                    // console.log(chatHistory)
-                    // chatHistory+= ({chatMsg : chat.chatMsg})
-                    // console.log(chatHistory[0])
-                    // chatHistory.append(chat.chatMsg)
-               
-                // {chatMsg: chat.chatMsg, sender : chat.sender, group: chat.group, channel: chat.channel}  
+
                 collection.updateOne({ channelName : chat.channelName },{$set:{chatHist : chatHistory}}, {upsertL: true},  (err, data) =>{
-                // collection.insertOne({channelName: chat.channelName, chatHist :  chatHistory}, (err, data) =>{
                     if (err){
                         console.log(err)
                     } else {
@@ -29,9 +23,15 @@ module.exports = {
             socket.on('test', (test)=>{   
                 collection.find({channelName: test}).toArray((err, data) =>{
                     console.log('connection fired')
-                    console.log(test)
-                    console.log(data[0].chatHist)
                     io.emit('test', data[0].chatHist ); 
+                })  
+            }),
+            socket.on('channel', (channel)=>{  
+                collection.find().toArray((err, data) =>{
+                    console.log('channel fired')
+                    for (i =0; i < data.length; i++){
+                        io.emit('channel', data[i].channelName);
+                    }   
                 })  
             })
         })

@@ -1,5 +1,4 @@
-import { Component, OnInit, ɵsetCurrentInjector, Injectable } from '@angular/core';
-import { Observable } from "rxjs";
+import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import { Router } from '@angular/router';
 
@@ -16,7 +15,7 @@ export class ChatComponent implements OnInit {
   ioConnection: any;
   isValid: boolean = false
   isInChannel = false;
-  channelList = "";
+  channelSelected = "";
   listOfChannels = [];
 
   constructor(private chatService : ChatService, private router: Router) { }
@@ -31,31 +30,35 @@ export class ChatComponent implements OnInit {
 
 private initToConnection(){
   this.chatService.initSocket();
+  this.getChannel();
+}
+
+public pickRoom(channelSelected){
+  this.channelSelected = channelSelected;
   this.getMsg();
+}
 
-
+public getChannel(){
+  this.chatService.sendchannel("test");
+  this.ioConnection = this.chatService.channel().subscribe((channel: any)=> {
+    this.listOfChannels.push(channel)
+  });
 }
 
 public getMsg(){
-  let y = 'Channel 2'
-  
-  this.chatService.sendtest(y);
+  let fromChannel = this.channelSelected
+  this.chatService.sendtest(fromChannel);
   this.ioConnection = this.chatService.test().subscribe((test: any)=> {
     this.messages = [];
-    // console.log(test)
       for (let i = 0; i < test.length; i++){
-        // console.log(test[0].chatHist[i].chatMsg)
-        console.log(test[i].chatMsg)
-      //   // let newMsg =  test[i].chatMsg
         this.messages.push(test[i].chatMsg);
-        console.log(this.messages)
       }
   });
 }
 
 
 public chat(chatMsg){
-  this.newMessage = {chatMsg: this.chatMsg, sender : localStorage.getItem('currentUser'), group: "group 1", channelName: "Channel 1" };
+  this.newMessage = {chatMsg: this.chatMsg, channelName: this.channelSelected };
     if (this.chatMsg){
       this.chatService.sendChat(this.newMessage);
       this.chatMsg = null;
