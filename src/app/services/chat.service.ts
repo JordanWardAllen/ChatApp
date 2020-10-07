@@ -49,6 +49,22 @@ export class ChatService {
     return observable;
   }
 
+  public user(): Observable<any> {
+    let observable = new Observable(observer=>{
+      this.socket.on('user', (user) => observer.next(user));
+    })
+    return observable;
+  }
+
+  public group(): Observable<any> {
+    
+    let observable = new Observable(observer=>{
+      this.socket.on('group', (group) => observer.next(group));
+    })
+    
+    return observable;
+  }
+
   public sendtest(test: any): void {
     this.socket.emit('test', test);
   }
@@ -63,6 +79,22 @@ export class ChatService {
    public sendChat(chat: any): void {
     this.socket.emit('chat', chat);
   }
+
+  public sendUser(user: any): void {
+    console.log('did something')
+    this.socket.emit('user', user);
+  }
+
+  public sendGroup(group: any): void {
+    this.socket.emit('group', group);
+  }
+
+
+  public sendNewChannel(newChannel: any): void {
+    console.log("new channel socket service fired")
+    this.socket.emit('newChannel', newChannel);
+  }
+
 
 
 

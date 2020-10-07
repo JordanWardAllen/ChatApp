@@ -1,12 +1,22 @@
 <div class="container">
+  <div class="form-group">
+    <form>
+      <select [(ngModel)]="groupSelected" name="groupSelected">
+        <option [ngValue]="null">select channel</option>
+        <option *ngFor="let group of listOfGroups">{{group}}</option>
+      </select>
+      <button (click)="pickGroup(groupSelected)" class="btn btn-primary">Select</button>
+    </form>
+
+  </div>
 
       <form>
-          <div class="form-group">
-            <label for="chatMsg">New Message</label>
-            <input type="text" [(ngModel)]="chatMsg" name="chatMsg" id="chatMsg" class="form-control">
-            <button (click)="chat(chatMsg)" class="btn btn-primary">Send</button>
-          </div>
-      </form>
+        <div class="form-group">
+          <label for="chatMsg">New Channel</label>
+          <input type="text" [(ngModel)]="newChannelName" name="newChannelName" id="newChannelName" class="form-control">
+          <button (click)="createChannel(newChannelName)" class="btn btn-primary">Create</button>
+        </div>
+    </form>
 
       <div class="form-group">
       <form>
@@ -15,10 +25,19 @@
           <option *ngFor="let channel of listOfChannels">{{channel}}</option>
         </select>
         <button (click)="pickRoom(channelSelected)" class="btn btn-primary">Join</button>
+        <button (click)="leaveRoom()" class="btn btn-primary">Leave</button>
       </form>
 
     </div>
 
+
+    <form>
+      <div class="form-group">
+        <label for="chatMsg">New Message</label>
+        <input type="text" [(ngModel)]="chatMsg" name="chatMsg" id="chatMsg" class="form-control">
+        <button (click)="chat(chatMsg)" class="btn btn-primary">Send</button>
+      </div>
+  </form>
   
     <h2>Chat messages</h2>
     <ul id="leftCol">
@@ -27,3 +46,17 @@
 
 
   </div> 
+  <div class="form-group">
+    <form>
+      <select [(ngModel)]="groupSelected" name="groupSelected">
+        <option [ngValue]="null">select group</option>
+        <option *ngFor="let group of listOfGroups">{{group}}</option>
+      </select>
+      <select [(ngModel)]="userSelected" name="userSelected">
+        <option [ngValue]="null">select user</option>
+        <option *ngFor="let user of listOfUsers">{{user}}</option>
+      </select>
+      <button (click)="assignUser(groupSelected, userSelected)" class="btn btn-primary">Submit</button>
+    </form>
+
+  </div>
