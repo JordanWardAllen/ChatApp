@@ -61,6 +61,7 @@ public pickGroup(groupSelected){
   if (groupSelected){
     localStorage.setItem('currentGroup', groupSelected);
     this.groupSelected = groupSelected;
+    // console.log(groupSelected)
     // this.getUsers();
     this.getChannels();
   } else {
@@ -77,7 +78,7 @@ public leaveRoom(){
 
 public getChannels(){
   this.listOfChannels = [];
-  this.chatService.sendchannel(this.currentUser);
+  this.chatService.sendchannel(localStorage.getItem('currentGroup'));
   this.ioConnection = this.chatService.channel().subscribe((channel: any)=> {
     this.listOfChannels = channel
     // for (let i = 0; i< channel.length; i++){

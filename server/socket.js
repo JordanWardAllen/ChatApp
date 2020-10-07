@@ -47,30 +47,17 @@ module.exports = {
             }),
             socket.on('channel', (channel)=>{  
                ListOfchannels = [] 
-            //    console.log(channel)
-                groupCollection.find().toArray((err, data) =>{
+                groupCollection.findOne({groupName: channel}, (err, data) =>{
                     console.log('channel fired')
-                    for (i =0; i < data.length; i++){
-                        for (t =0; t < data[i].groupMem.length; t++){
-                            if (data[i].groupMem[t].username == channel){
-                                ListOfchannels = data[i].channelList
-                                console.log(data[i].channelList)
-                                // console.log(data[i].channelList[t])
-                            }
-
-                        }
-                    }    
-                    for (j = 0; j < ListOfchannels.length; j++){
-                        ListOfchannels[j] = ListOfchannels[j].channelName
-                        // console.log(ListOfchannels)
+                    for (i =0; i < data.channelList.length; i++){
+                            ListOfchannels[i] = data.channelList[i].channelName
                     }
+
                     io.emit('channel', ListOfchannels);
                 })  
             }),
             socket.on('newChannel', (newChannel)=>{  
-                console.log("new channel fired")
-                console.log(newChannel)
-                
+                console.log("new channel fired")              
                 channelCollection.insertOne({channelName : newChannel.channelName, chatHist : [{chatMsg : "No current chat history"}]}, (err, data)=>{
                     console.log("new channel created")
                 })
