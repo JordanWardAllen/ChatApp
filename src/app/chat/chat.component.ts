@@ -14,11 +14,13 @@ export class ChatComponent implements OnInit {
   messages  = [];
   newMessage = {};
   newChannel = {};
+  userAssignment = {};
   ioConnection: any;
   isValid: boolean = false
   isInChannel = false;
   channelSelected = "";
   groupSelected = "";
+  groupSelectedToAssign = ""
   userSelected = "";
   listOfChannels = [];
   listOfGroups = [];
@@ -118,9 +120,11 @@ public getGroups(){
     // this.listOfGroups.push(group)
   });
 }
-public assignUser(groupSelected, userSelected){
-  if (userSelected && groupSelected){
-    console.log(groupSelected, userSelected)
+public assignUser(groupSelectedToAssign, userSelected){
+  this.userAssignment = {groupName : groupSelectedToAssign, username: userSelected}
+  if (userSelected && groupSelectedToAssign){
+    this.chatService.assignUser(this.userAssignment);
+    // console.log(groupSelectedToAssign, userSelected)
   } else {
     alert("Please select both a group and user to assign before submitting")
   }

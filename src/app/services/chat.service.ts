@@ -89,6 +89,10 @@ export class ChatService {
     this.socket.emit('group', group);
   }
 
+  public assignUser(userAssignment): void {
+    this.socket.emit('userAssignment', userAssignment);
+  }
+
 
   public sendNewChannel(newChannel: any): void {
     console.log("new channel socket service fired")

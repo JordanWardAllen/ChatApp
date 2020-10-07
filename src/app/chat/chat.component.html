@@ -48,7 +48,7 @@
   </div> 
   <div class="form-group">
     <form>
-      <select [(ngModel)]="groupSelected" name="groupSelected">
+      <select [(ngModel)]="groupSelectedToAssign" name="groupSelectedToAssign">
         <option [ngValue]="null">select group</option>
         <option *ngFor="let group of listOfGroups">{{group}}</option>
       </select>
@@ -56,7 +56,7 @@
         <option [ngValue]="null">select user</option>
         <option *ngFor="let user of listOfUsers">{{user}}</option>
       </select>
-      <button (click)="assignUser(groupSelected, userSelected)" class="btn btn-primary">Submit</button>
+      <button (click)="assignUser(groupSelectedToAssign, userSelected)" class="btn btn-primary">Submit</button>
     </form>
 
   </div>

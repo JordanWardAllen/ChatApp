@@ -143,6 +143,55 @@ module.exports = {
                     }
                 })
 
+            }),
+
+            socket.on('userAssignment', (userAssignment)=>{  
+                console.log('userAssignment fired')
+                groupCollection.findOne({ groupName : userAssignment.groupName },  (err, data) =>{
+                    if (err){
+                        console.log(err)
+                    } else {
+                        // currentChannelList = data.channelList
+                        newMemberList = data.groupMem
+                        newMemberList[data.groupMem.length] = {username : userAssignment.username}
+                        console.log(newMemberList)
+                    }
+                    groupCollection.updateOne({ groupName : userAssignment.groupName },{$set:{groupMem : newMemberList}}, {upsertL: true},  (err, data) =>{
+                        if (err){
+                            console.log(err)
+                        } else {
+                            console.log('successfully updated member list')
+                        }
+                    })
+                    
+                })
+                // groupList = []
+                // userCollection.findOne({username : group}, (err, data)=>{
+                //     if (data.role == "Super"){
+                //         groupCollection.find().toArray((err, data) =>{
+                //             for (i = 0; i< data.length; i++){
+                //                 console.log(data[i].groupName)
+                //                 groupList[i] = data[i].groupName
+                //             }
+                //             io.emit('group', groupList);
+                //         })   
+                //     } else {
+                //         groupList = []
+                //         groupCollection.find().toArray((err, data) =>{
+                            
+                //             for (i = 0; i< data.length; i++){
+                //                 for (j = 0; j < data[i].groupMem.length ;j++){
+                //                     if (data[i].groupMem[j].username == group){
+                //                         groupList[i - 1] = data[i].groupName 
+                //                     }
+                //                 }
+                //             }
+                //             io.emit('group', groupList);
+                            
+                //         }) 
+                //     }
+                // })
+
             })
         })
     }
