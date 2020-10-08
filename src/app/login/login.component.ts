@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 }
   
   public login( pwd, email){
-  
+
     this.credentials = {pwd: this.pwd,  email: this.email}
     this.userService.auth(this.credentials).subscribe((data: any) => {
       if (data.valid == "true"){

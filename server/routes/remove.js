@@ -1,4 +1,6 @@
 module.exports = function(db, app, ObjectID){
+
+    // Remove API queries the MongoDB for an existing user ID that matches the request to delete.
     app.post('/api/remove', function(req, res){
         if (!req.body){
             return res.sendStatus(400)

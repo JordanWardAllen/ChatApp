@@ -28,12 +28,6 @@ export class ChatService {
     })
     return observable;
   }
-  // public onMessage(): Observable<any> {
-  //   let observable = new Observable(observer=>{
-  //     this.socket.on('chatMsg', () => observer.next());
-  //   })
-  //   return observable;
-  // }
 
   public test(): Observable<any> {
     let observable = new Observable(observer=>{
@@ -41,21 +35,21 @@ export class ChatService {
     })
     return observable;
   }
-
+// Channel observable.
   public channel(): Observable<any> {
     let observable = new Observable(observer=>{
       this.socket.on('channel', (channel) => observer.next(channel));
     })
     return observable;
   }
-
+// User observable.
   public user(): Observable<any> {
     let observable = new Observable(observer=>{
       this.socket.on('user', (user) => observer.next(user));
     })
     return observable;
   }
-
+// Group observable.
   public group(): Observable<any> {
     
     let observable = new Observable(observer=>{
@@ -65,6 +59,10 @@ export class ChatService {
     return observable;
   }
 
+
+// Each of the following functions emits a socket event utilised in each of the ng components.
+
+
   public sendtest(test: any): void {
     this.socket.emit('test', test);
   }
@@ -72,16 +70,12 @@ export class ChatService {
   public sendchannel(channel: any): void {
     this.socket.emit('channel', channel);
   }
-  // public sendMsg(chatMsg: any): void {
-  //   this.socket.emit('chatMsg', chatMsg);
-  // }
 
    public sendChat(chat: any): void {
     this.socket.emit('chat', chat);
   }
 
   public sendUser(user: any): void {
-    console.log('did something')
     this.socket.emit('user', user);
   }
 
@@ -95,12 +89,7 @@ export class ChatService {
 
 
   public sendNewChannel(newChannel: any): void {
-    console.log("new channel socket service fired")
     this.socket.emit('newChannel', newChannel);
   }
-
-
-
-
 
 }

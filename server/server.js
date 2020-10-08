@@ -17,6 +17,8 @@ app.use('/userImages', express.static(path.join(__dirname, '../src/assets/userIm
 
 const url = 'mongodb://localhost:27017';
 
+
+// MongoDB connection
 MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){
     if (err) {return console.log(err)} else { console.log('database created!')}
     const dbName = 'chatAppDB';

@@ -1,8 +1,10 @@
 module.exports = function(db, app){
+    // Add API inserts new user to the MongoDB and returns the new user object to the client.
     app.post('/api/add', function(req, res){
         if (!req.body){
             return res.sendStatus(400)
         }
+
         console.log('fired')
         user = req.body
         

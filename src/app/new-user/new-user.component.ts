@@ -15,8 +15,8 @@ export class NewUserComponent implements OnInit {
 
 
 
-  username : String = "";
-  pwd : String = "";
+  newUsername : String = "";
+  newUserPwd : String = "";
   email : String = "";
   newUserRole : String = "";
   newUserCredentials = {};
@@ -32,26 +32,27 @@ export class NewUserComponent implements OnInit {
   }
   }
 
-
-  createUser(username, pwd){
+  // Creates a new user and assigns roles depending on currently logged user roles. After successful submission, page routes to the chat page.
+  createUser(newUsername, newUserPwd){
     this.CurrentUserRole = localStorage.getItem('currentUserRole');
-    console.log(this.CurrentUserRole)
     if (this.CurrentUserRole == "Super"){
-      this.newUserRole = "Group Admin"
-      console.log('new user group admin')
+        this.newUserRole = "Group Admin"
     } else if (this.CurrentUserRole == "Group Admin"){
-      this.newUserRole = "Group Assis"
-      console.log('new user group assis')
+        this.newUserRole = "Group Assis"
     }
-    let newUserCredentials = {username : this.username, pwd : this.pwd, email : this.email, role : this.newUserRole};
-    this.userService.addUser(newUserCredentials).subscribe((data: any) => {
-      console.log(data)
-      this.success = data;
-      if (this.success.valid == false){
-        alert("This ID is not valid, please try another.")
-      }else{ 
-        this.router.navigateByUrl('');
-      }
-      })
+
+    if(newUsername && newUserPwd){
+      let newUserCredentials = {username : this.newUsername, pwd : this.newUserPwd, email : this.email, role : this.newUserRole};
+      this.userService.addUser(newUserCredentials).subscribe((data: any) => {
+        this.success = data;
+        if (this.success.valid == false){
+          alert("This ID is not valid, please try another.")
+        }else{ 
+          this.router.navigateByUrl('');
+        }
+        })
+    } else {
+      alert("Please enter all values for a new user");
     }
+  }
 }

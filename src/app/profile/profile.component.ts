@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.IdToUpdate =  localStorage.getItem('currentID');
+    // Queries the MongoDB for the userID to update and displays query data in form.
     this.userService.getUser(this.IdToUpdate).subscribe((data) =>{
       this.currentUser = data;
       this.username = data.username
@@ -32,11 +33,10 @@ export class ProfileComponent implements OnInit {
       this.role = data.role;
     })
   }
-
-  UpdateUser(username,email, role, pwd, ){
+// Sends an update query to MongoDB.
+  UpdateUser(username,email, role, pwd){
     let currentUser = {id: this.id, username: this.username, pwd: this.pwd, email : this.email, role: this.role, valid : "true"};
     this.userService.updateUser(currentUser).subscribe((data: any) => {
-      console.log(currentUser);
       this.router.navigateByUrl('');
     })
   }

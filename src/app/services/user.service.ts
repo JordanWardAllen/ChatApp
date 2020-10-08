@@ -17,6 +17,9 @@ export class UserService {
 
 
   constructor(private http: HttpClient) { }
+
+
+  // The following functions are utilised in the ng components and are routing the the server/routes directory to matching JS files on matching URL requests. 
   addUser(credentials){
     return this.http.post<any>("http://localhost:3000/api/add", credentials);
   }

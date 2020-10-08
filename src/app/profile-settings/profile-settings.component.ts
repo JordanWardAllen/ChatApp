@@ -17,8 +17,6 @@ export class ProfileSettingsComponent implements OnInit {
   imagePath = "";
   imagePath2 = "src/assets/";;
   
-  
-  
 
   imgSrc =  "";
   username  = "";
@@ -46,33 +44,25 @@ export class ProfileSettingsComponent implements OnInit {
     })
   }
 
-
+// Sends update query to MongoDO with current
   UpdateUser(newUsername,newEmail, newRole, newPwd){
     let currentUser = {id: this.id, username: newUsername, pwd: newPwd, email : newEmail, role: newRole, imgSrc: this.imgSrc, valid : "true"};
     this.userService.updateUser(currentUser).subscribe((data: any) => {
-      // console.log(currentUser);
       this.router.navigateByUrl('');
     })
   }
 
-
+// File selected event on Image selection
   onFileSelected(event){
-    console.log(event);
     this.selectedFile = event.target.files[0];
   }
-
+// New image file is uploaded to the src/assets file but currently can't display that image 
   onUpload(){
     const fd = new FormData();
     fd.append('image', this.selectedFile, this.selectedFile.name);
     this.imageUploadService.imgUpload(fd).subscribe(data =>{
       this.imagePath = data.filename;
       this.imgSrc = "assets/" + data.filename;
-      // console.log(data.filename + ' , ' + data.size);
-      console.log(data.filename)
     })
-    // let currentUser = {id: this.id, username: this.username, pwd: this.pwd, email : this.email, role: this.role , imgSrc: this.imgSrc, valid : "true"};
-    // this. UpdateUser(currentUser.username,currentUser.email, currentUser.role, currentUser.pwd, this.imgSrc){
-
-    // }
   }
 }
