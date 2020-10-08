@@ -34,11 +34,11 @@ module.exports = {
                 })
             }),
 
-            socket.on('test', (test)=>{   
-                channelCollection.find({channelName: test}).toArray((err, data) =>{
-                    console.log('connection fired')
+            socket.on('chatHist', (chatHist)=>{   
+                channelCollection.find({channelName: chatHist}).toArray((err, data) =>{
+                    console.log('chatHist fired')
                     if (data[0].chatHist){
-                        io.emit('test', data[0].chatHist ); 
+                        io.emit('chatHist', data[0].chatHist ); 
                     } else {
                         console.log("chatHistory error for" + data[0])
                     }

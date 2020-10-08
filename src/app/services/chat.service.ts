@@ -29,9 +29,9 @@ export class ChatService {
     return observable;
   }
 
-  public test(): Observable<any> {
+  public chatHist(): Observable<any> {
     let observable = new Observable(observer=>{
-      this.socket.on('test', (test) => observer.next(test));
+      this.socket.on('chatHist', (chatHist) => observer.next(chatHist));
     })
     return observable;
   }
@@ -63,8 +63,8 @@ export class ChatService {
 // Each of the following functions emits a socket event utilised in each of the ng components.
 
 
-  public sendtest(test: any): void {
-    this.socket.emit('test', test);
+  public sendchatHist(chatHist: any): void {
+    this.socket.emit('chatHist', chatHist);
   }
 
   public sendchannel(channel: any): void {

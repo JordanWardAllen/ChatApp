@@ -89,11 +89,11 @@ export class ChatComponent implements OnInit {
 // Returns chat history of currently selected channel.
   public getMsg(){
     let fromChannel = this.channelSelected
-    this.chatService.sendtest(fromChannel);
-    this.ioConnection = this.chatService.test().subscribe((test: any)=> {
+    this.chatService.sendchatHist(fromChannel);
+    this.ioConnection = this.chatService.chatHist().subscribe((chatHist: any)=> {
       this.messages = [];
-        for (let i = 0; i < test.length; i++){
-          this.messages.push(test[i].chatMsg);
+        for (let i = 0; i < chatHist.length; i++){
+          this.messages.push(chatHist[i].chatMsg);
         }
     });
   }
