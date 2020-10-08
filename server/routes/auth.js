@@ -7,6 +7,7 @@ module.exports = function(db, app){
                 res.send(data)
             } else {
                 res.send({valid: "false"})
+                return {valid: "false"}
             }
         })
     })

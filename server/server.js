@@ -10,6 +10,12 @@ var ObjectID = require('mongodb').ObjectID;
 const path = require('path');
 const formidable = require('formidable');
 
+
+
+//For some reason had to remove the listen import from MongoDB connection function.
+server = require('./listen')(app, http);
+module.exports = server
+
 app.use(cors());
 app.use(bodyParser.json());
 // app.use(express.static(path.join(__dirname, "../dist/images")))
@@ -31,6 +37,9 @@ MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, func
     require('./routes/imgUpload.js')(db, app, formidable);
     require('./routes/update.js')(db, app, ObjectID);
     require('./routes/remove.js')(db, app, ObjectID);
-    require('./listen')(app, http);
+    // require('./listen')(app, http);
     socket.connect(io, db)
 });
+
+
+// return server

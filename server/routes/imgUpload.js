@@ -27,6 +27,7 @@ module.exports = function(db, app, formidable){
                 numberOfImages : 1,
                 message : "Upload was successful"
             })
+            return res.result
         })
 
         form.parse(req);

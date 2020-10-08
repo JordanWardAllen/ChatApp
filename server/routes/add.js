@@ -12,7 +12,6 @@ module.exports = function(db, app){
         collection.find().count((err, count) =>{
             newId = count
             newVal = {id: newId.toString(), username : user.username , pwd: user.pwd, email: user.email, role: user.role, valid: "true"};
-            console.log(newVal)
                 collection.insertOne(newVal, (err, data) =>{
                     if (err){
                         console.log(err)

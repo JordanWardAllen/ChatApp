@@ -8,6 +8,7 @@ module.exports = function(db, app){
                 console.log(err)
             } else {
                 res.send(data)
+                return data
             }
         })
     }) 
