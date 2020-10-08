@@ -10,8 +10,8 @@ module.exports = function(db, app, ObjectID){
 
         userID = req.body.id
         const collection = db.collection('users');
- 
-        collection.updateOne({ id : userID },{$set:{username : req.body.username , pwd: req.body.pwd, email: req.body.email, role: req.body.role}}, {upsertL: true}, 
+
+        collection.updateOne({ id : userID },{$set:{username : req.body.username , pwd: req.body.pwd, email: req.body.email, role: req.body.role, imgSrc: req.body.imgSrc}}, {upsertL: true}, 
             (err, data) =>{
             if (err){
                 console.log(err)

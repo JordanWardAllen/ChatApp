@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
   UpdateUser(username,email, role, pwd){
     let currentUser = {id: this.id, username: this.username, pwd: this.pwd, email : this.email, role: this.role, valid : "true"};
     this.userService.updateUser(currentUser).subscribe((data: any) => {
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('/profiles');
     })
   }
 

@@ -11,22 +11,16 @@
                 <input type="text"   class="form-control" placeholder="Role" [(ngModel)]="role" name="role" >
                 <label>Password: </label>
                 <input type="text"   class="form-control" placeholder="Password" [(ngModel)]="pwd" name="pwd" >
+                <input type="file"  class="form-control"(change)="onFileSelected($event)"  name="imageFile" id="imageFile">
             </form>
             <br>
             <button (click)="UpdateUser(username,email, role, pwd)" class="btn btn-primary">Update</button>
         </div>
     </div>
-    <div class="container">
-        <h3> Upload a profile picture to customise your profile</h3>
-        <form>
-            <div class="form-group">
-                <input type="file"  class="form-control"(change)="onFileSelected($event)"  name="imageFile" id="imageFile">
-            </div>
-            <button type="button" (click)="onUpload()"  class="btn btn-primary">Submit</button>
-        </form>
+
         <img src="{{imgSrc}}">
-        <img src="assets/a.jpg">
+        <!-- <img src="assets/userImages/test.jpg"> -->
         <!-- <img src="assets/unnamed.jpg"> -->
     
-    </div>
+
 </div>
