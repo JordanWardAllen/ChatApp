@@ -1,6 +1,10 @@
 # Chat
 
+<<<<<<< HEAD
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
+=======
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
+>>>>>>> d42bdafe60386c12641f49f19c144bc9aee6725d
 
 ## Development server
 
