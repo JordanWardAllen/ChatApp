@@ -64,13 +64,4 @@ export class ProfileSettingsComponent implements OnInit {
   onFileSelected(event){
     this.selectedFile = event.target.files[0];
   }
-// New image file is uploaded to the src/assets file but currently can't display that image 
-  onUpload(){
-    // const fd = new FormData();
-    // fd.append('image', this.selectedFile, this.selectedFile.name);
-    // this.imageUploadService.imgUpload(fd).subscribe(data =>{
-    //   this.imagePath = data.filename;
-    //   this.imgSrc = "assets/userImages/" + data.filename;
-    // })
-  }
 }

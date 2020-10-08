@@ -28,13 +28,15 @@ export class ChatComponent implements OnInit {
   listOfGroups = [];
   listOfUsers = [];
 
-  currentUser = localStorage.getItem('currentUser')
-  currentUserRole = localStorage.getItem('currentUserRole')
+  currentUser = "";
+  currentUserRole = "";
   currentGroup = "";
 
   constructor(private chatService : ChatService, private router: Router) { }
 
   ngOnInit(): void {
+    this.currentUserRole = localStorage.getItem('currentUserRole');
+    this.currentUser = localStorage.getItem('currentUser')
     this.initToConnection();
     if (localStorage.getItem('valid')){
       this.isValid = true
