@@ -8,20 +8,20 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Required Modules
 Node project requires the following modules to be installed via npm:
-  body-parser
-  chai
-  chai-http
-  cors
-  express
-  formidable
-  mongodb
-  socket.io
-  mocha (as a dev dependency)
+  * body-parser
+  * chai
+  * chai-http
+  * cors
+  * express
+  * formidable
+  * mongodb
+  * socket.io
+  * mocha (as a dev dependency)
   
   
   
 Angular project requires the following modules to be installed via npm:
-  bootstrap
+  * bootstrap
   
 
 ## Development server
